@@ -1,24 +1,24 @@
-English | [简体中文](https://github.com/Santerc/bodori_rm/README_cn_.md) 
+English | [简体中文](https://github.com/Santerc/bandori_rm/README_cn_.md) 
 # Bandori-Rose&Monica
 [![最低 Hugo 版本](https://img.shields.io/static/v1?label=最低-HUGO-版本&message=0.87.0&color=blue&logo=hugo)](https://github.com/gohugoio/hugo/releases/tag/v0.87.0)
-[![GitHub](https://img.shields.io/github/license/Santerc/bodori_rm)](https://github.com/Santerc/bodori_rm/LICENSE)
+[![GitHub](https://img.shields.io/github/license/Santerc/bandori_rm)](https://github.com/Santerc/bandori_rm/LICENSE)
 
 
-Bodori-Rose&Monica is a theme for [Hugo](https://gohugo.io). We use html css and js to build this theme for Hugo and Bodori fans.
+Banori-Rose&Monica is a theme for [Hugo](https://gohugo.io). We use html css and js to build this theme for Hugo and Bandori fans.
 ## Installation
-you can download it to `$your_Hugo_site_directory$/theme` and then add bodori to your Hugo config file.
+you can download it to `$your_Hugo_site_directory$/theme` and then add bandori to your Hugo config file.
 
 git clone is certainly alse available
 ```shell
 cd $your_Hugo_site_directory$
 mkdir theme
 cd theme
-git clone https://github.com/Santerc/bodori_rm.git
+git clone https://github.com/Santerc/bandori_rm.git
 ```
 
 
 
-## Quick start using Bodori Rose&Monica
+## Quick start using Banori Rose&Monica
 
 > **Note:** Ensure you have **Go** and **Hugo** installed, and that you have created a new Hugo project before proceeding.
 

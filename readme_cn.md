@@ -1,7 +1,7 @@
-[English](https://github.com/Santerc/bodori_rm/readme.md)  | 简体中文
+[English](https://github.com/Santerc/bandori_rm/readme.md)  | 简体中文
 # Bandori-Rose&Monica
 [![最低 Hugo 版本](https://img.shields.io/static/v1?label=最低-HUGO-版本&message=0.87.0&color=blue&logo=hugo)](https://github.com/gohugoio/hugo/releases/tag/v0.87.0)
-[![GitHub](https://img.shields.io/github/license/Santerc/bodori_rm)](https://github.com/Santerc/bodori_rm/LICENSE)
+[![GitHub](https://img.shields.io/github/license/Santerc/bandori_rm)](https://github.com/Santerc/bandori_rm/LICENSE)
 
 
 Bandori-Rose&Monica 是一个为 [Hugo](https://gohugo.io) 设计的主题。使用 HTML、CSS 和 JS 为 Hugo 和 邦邦 粉打造了这款主题。
@@ -15,7 +15,7 @@ Bandori-Rose&Monica 是一个为 [Hugo](https://gohugo.io) 设计的主题。使
 cd $your-nugo-site$
 mkdir themes
 cd themes
-git clone https://github.com/Santerc/bodori_rm.git
+git clone https://github.com/Santerc/bandori_rm.git
 ```
 
 ## 快速开始使用 Bandori Rose&Monica
