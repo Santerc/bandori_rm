@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ block "title" . }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+    
+    <script>
+        (function() {
+            // 1. 读取本地存储
+            const savedTheme = localStorage.getItem('theme');
+            // 2. 读取系统偏好 (是否是深色模式)
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            // 3. 立即设置属性
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                // 如果是浅色，移除属性 (或者是 setAttribute('data-theme', 'light'))
+                document.documentElement.removeAttribute('data-theme');
+            }
+        })();
+    </script>
+
+    <!-- 样式表 -->
+    {{ $style := resources.Get "css/main.css" | minify }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}">
+
+    <!-- Fuse.js 搜索库 -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+</head>
+<body>
+    <!-- 📱 移动端遮罩层 (点击关闭侧边栏) -->
+    <div id="mobile-backdrop"></div>
+    <!-- 1. 顶部通栏 -->
+    {{ partial "header.html" . }}
+
+    <!-- 2. 核心三栏网格 -->
+    <div class="grid-container">
+        <aside class="sidebar-left">
+            {{ partial "sidebar-left.html" . }}
+        </aside>
+
+        <main class="main-content">
+            {{ block "main" . }}{{ end }}
+        </main>
+
+        <aside class="sidebar-right">
+            {{ partial "sidebar-right.html" . }}
+        </aside>
+    </div>
+
+    <!-- 3. 底部 -->
+    {{ partial "footer.html" . }}
+
+    <!-- 脚本资源 -->
+    {{ $js := resources.Get "js/main.js" | minify }}
+    <script src="{{ $js.Permalink }}"></script>
+
+    {{ $cursor := resources.Get "js/cursor.js" | minify }}
+    <script src="{{ $cursor.Permalink }}"></script>
+    
+    {{ $search := resources.Get "js/search.js" | minify }}
+    <script src="{{ $search.Permalink }}"></script>
+</body>
+</html>
