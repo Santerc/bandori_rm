@@ -23,8 +23,70 @@
     </script>
 
     <!-- 样式表 -->
-    {{ $style := resources.Get "css/main.css" | minify }}
-    <link rel="stylesheet" href="{{ $style.Permalink }}">
+    {{ $style := resources.Get "css/main.css" }}
+    {{ if $style }}
+        {{ $style = $style | minify | fingerprint }}
+        <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" id="main-css">
+        <script>console.log("CSS Mode: Assets Pipeline (Minified & Fingerprinted)", "{{ $style.RelPermalink }}");</script>
+    {{ else }}
+        <!-- 如果 assets 中找不到，尝试加载 static 目录下的文件 -->
+        <link rel="stylesheet" href="{{ "css/main.css" | relURL }}" id="main-css">
+        <script>console.log("CSS Mode: Static Fallback (RelURL)", "{{ "css/main.css" | relURL }}");</script>
+    {{ end }}
+
+    <style>
+        html {
+            font-size: 80%; /* 这会让页面所有基于 rem 的尺寸缩小到 80% */
+        }
+    </style>
+
+    <!-- 调试脚本：检查 CSS 是否真的加载成功 -->
+    {{/*  <script>
+        window.addEventListener('load', function() {
+            const cssLink = document.getElementById('main-css');
+            if (cssLink) {
+                // 尝试获取样式表对象
+                try {
+                    const sheet = cssLink.sheet;
+                    if (sheet && sheet.cssRules.length > 0) {
+                        console.log("✅ CSS Loaded Successfully! Rules count:", sheet.cssRules.length);
+                    } else {
+                        console.warn("⚠️ CSS File found but seems empty or blocked by CORS.");
+                    }
+                } catch (e) {
+                    console.warn("⚠️ CSS Loaded but cannot access rules (likely CORS issue if on CDN/different domain):", e);
+                }
+                
+                // 再次确认计算样式
+                const bodyColor = window.getComputedStyle(document.body).color;
+                console.log("🎨 Computed Body Color:", bodyColor);
+            } else {
+                console.error("❌ CSS Link Element NOT FOUND!");
+            }
+        });
+    </script>  */}}
+    <script>
+        // 1. 获取 Hugo 渲染时的 BaseURL (例如: "https://santerc.github.io/blog/")
+        const siteBaseURL = "{{ .Site.BaseURL }}";
+
+        // 2. 定义全局工具函数，模拟 Hugo 的 absURL
+        window.absURL = function(path) {
+            // 如果路径已经是 http 开头，直接返回
+            if (path && (path.indexOf('http://') === 0 || path.indexOf('https://') === 0)) {
+                return path;
+            }
+            
+            // 确保 path 不以 / 开头 (因为 BaseURL 通常已有尾部 /)
+            if (path && path.indexOf('/') === 0) {
+                path = path.substring(1);
+            }
+
+            return siteBaseURL + (path || "");
+        };
+        
+        // 兼容旧代码的 baseURL 变量
+        window.baseURL = siteBaseURL;
+    </script>
 
     <!-- Fuse.js 搜索库 -->
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
